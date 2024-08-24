@@ -1,0 +1,69 @@
+:root {
+  // ... [keep existing color definitions]
+
+  // Update primary color to match the logo
+  --ion-color-primary: #1e4b94;
+  --ion-color-primary-rgb: 30, 75, 148;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1a4282;
+  --ion-color-primary-tint: #355d9f;
+
+  // Add a new font family
+  --ion-font-family: 'Arial', sans-serif;
+
+  // ... [keep other existing styles]
+}
+
+// Global styles
+body {
+  font-family: var(--ion-font-family);
+}
+
+.page-title {
+  color: var(--ion-color-primary);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.page-footer {
+  color: var(--ion-color-medium);
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+// ... [keep other existing styles]
+
+ion-modal {
+  --height: 60%;
+  --width: 90%;
+  --border-radius: 16px;
+  --box-shadow: 10px 10px 15px -3px #8780E0, -10px -10px 15px -4px #C680E0;
+}
+
+ion-modal::part(backdrop) {
+  background: #f6f8fc;
+  opacity: 1;
+}
+
+ion-modal ion-toolbar {
+  --background: #2f2f2f;
+  --color: white;
+}
+
+// style the alert popup
+ion-alert {
+  //background color of the alert
+  --background: var(--ion-color-medium);
+  //color header of the alert
+  --color-header: var(--ion-color-primary);
+  //color of the alert message
+  --color-message: var(--ion-color-primary);
+  //color of the alert button text
+  --color-button-text: var(--ion-color-primary);
+}

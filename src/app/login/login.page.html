@@ -1,0 +1,25 @@
+<ion-content class="ion-padding">
+  <h1 class="page-title">Home Inventory</h1>
+  
+  <div class="login-container">
+    <form (ngSubmit)="onLogin()">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+      </ion-item>
+      <div class="submit-container">
+        <button type="submit" class="logo-submit">
+          <img src="assets/images/home-logo.png" alt="Login" class="home-logo">
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="page-footer">
+    SWDV655 Final Project
+  </div>
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ _message }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" [(ngModel)]="_name" name="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Quantity</ion-label>
+      <ion-select [(ngModel)]="_quantity" name="quantity" required>
+        <ion-select-option *ngFor="let qty of _quantities" [value]="qty">{{ qty }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Purchase Date</ion-label>
+      <ion-input 
+        type="text"
+        [(ngModel)]="_purchaseDate"
+        name="purchaseDate"
+        (click)="openDatePicker($event)"
+        readonly
+      ></ion-input>
+      <ion-button slot="end" fill="clear" (click)="openDatePicker($event)">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    
+    <ion-popover #popover [isOpen]="isDatePickerOpen" (didDismiss)="isDatePickerOpen = false">
+      <ng-template>
+        <ion-datetime 
+          #datetime
+          [(ngModel)]="_purchaseDate"
+          presentation="date" 
+          [showDefaultButtons]="true"
+          (ionChange)="dateChanged($event.detail.value ?? null)"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+    
+    <ion-item>
+      <ion-label position="floating">Location</ion-label>
+      <ion-input type="text" [(ngModel)]="_location" name="location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Asset Tag</ion-label>
+      <ion-input type="text" [(ngModel)]="_assetTag" name="assetTag"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Picture URL</ion-label>
+      <ion-input type="text" [(ngModel)]="_picture" name="picture"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Upload File</ion-label>
+      <input type="file" (change)="onFileSelected($event)">
+    </ion-item>
+    <ion-item *ngIf="_inventory?.file">
+      <ion-label>
+        <a [href]="_inventory?.file" target="_blank">Download File</a>
+      </ion-label>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="confirm()" [disabled]="!form.form.valid">
+      Save
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

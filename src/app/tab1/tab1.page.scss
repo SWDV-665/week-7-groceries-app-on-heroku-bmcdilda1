@@ -1,0 +1,41 @@
+ion-content {
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0px) + 56px);
+}
+
+ion-list {
+  margin-bottom: 80px; // Provide space for the FAB button
+}
+
+// Styling for swipe actions
+ion-item-options {
+  ion-item-option {
+    --background: var(--ion-color-light);
+    --color: var(--ion-color-dark);
+
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-dark);
+    }
+
+    &[color="secondary"] {
+      --background: var(--ion-color-secondary);
+      --color: var(--ion-color-secondary-contrast);
+    }
+
+    &[color="danger"] {
+      --background: var(--ion-color-danger);
+      --color: var(--ion-color-danger-contrast);
+    }
+
+    &[color="primary"] {
+      --background: var(--ion-color-primary);
+      --color: var(--ion-color-primary-contrast);
+    }
+  }
+}
+
+// Ensure icons are visible
+ion-icon {
+  color: currentColor;
+  font-size: 24px;
+}
