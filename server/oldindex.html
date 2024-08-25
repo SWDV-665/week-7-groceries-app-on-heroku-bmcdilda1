@@ -1,0 +1,32 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6 Server For homeinv App</title>
+</head>
+<body>
+
+
+   
+    <h1>Inventory App Server Status</h1>
+    <p id="connection-status">Checking connection status...</p>
+    <p id="connection-details">Checking connection details...</p>
+
+    <script>
+        // Fetch connection info from the server
+        fetch('/api/connection-info')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('connection-status').textContent = data.status;
+                document.getElementById('connection-details').textContent = data.details;
+            })
+            .catch(err => {
+                document.getElementById('connection-status').textContent = "Error";
+                document.getElementById('connection-details').textContent = "Could not retrieve connection details.";
+            });
+    </script>
+</body>
+</html>

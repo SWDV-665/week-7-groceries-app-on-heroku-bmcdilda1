@@ -1,0 +1,62 @@
+[
+    {
+      "assetName": "Laptop",
+      "assetQuantity": 1,
+      "serialNumber": "LAP123456",
+      "purchaseDate": "2023-05-15T00:00:00.000Z",
+      "location": "Office",
+      "assetTag": "LAP-001",
+      "picture": "http://example.com/pictures/laptop.jpg",
+      "file": "http://example.com/files/laptop-manual.pdf"
+    },
+    {
+      "assetName": "Smartphone",
+      "assetQuantity": 1,
+      "serialNumber": "SM123456",
+      "purchaseDate": "2023-06-20T00:00:00.000Z",
+      "location": "Living Room",
+      "assetTag": "SM-002",
+      "picture": "http://example.com/pictures/smartphone.jpg",
+      "file": "http://example.com/files/smartphone-manual.pdf"
+    },
+    {
+      "assetName": "Tablet",
+      "assetQuantity": 1,
+      "serialNumber": "TAB123456",
+      "purchaseDate": "2023-07-10T00:00:00.000Z",
+      "location": "Bedroom",
+      "assetTag": "TAB-003",
+      "picture": "http://example.com/pictures/tablet.jpg",
+      "file": "http://example.com/files/tablet-manual.pdf"
+    },
+    {
+      "assetName": "Printer",
+      "assetQuantity": 1,
+      "serialNumber": "PRI123456",
+      "purchaseDate": "2023-08-05T00:00:00.000Z",
+      "location": "Office",
+      "assetTag": "PRI-004",
+      "picture": "http://example.com/pictures/printer.jpg",
+      "file": "http://example.com/files/printer-manual.pdf"
+    },
+    {
+      "assetName": "Desk Chair",
+      "assetQuantity": 1,
+      "serialNumber": "CHA123456",
+      "purchaseDate": "2023-04-25T00:00:00.000Z",
+      "location": "Office",
+      "assetTag": "CHA-005",
+      "picture": "http://example.com/pictures/desk-chair.jpg",
+      "file": "http://example.com/files/desk-chair-assembly.pdf"
+    },
+    {
+      "assetName": "External Hard Drive",
+      "assetQuantity": 1,
+      "serialNumber": "EXT123456",
+      "purchaseDate": "2023-09-01T00:00:00.000Z",
+      "location": "Storage Room",
+      "assetTag": "EXT-006",
+      "picture": "http://example.com/pictures/external-hard-drive.jpg",
+      "file": "http://example.com/files/external-hard-drive-manual.pdf"
+    }
+  ]

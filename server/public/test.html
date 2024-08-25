@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .dashboard, .inventory-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .dashboard h2, .inventory-section h2 {
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+      color: #007bff;
+    }
+    .dashboard p, .inventory-section p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    img {
+      max-width: 100px;
+      height: auto;
+    }
+    .status-up {
+      color: green;
+    }
+    .status-down {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Inventory Management Dashboard</h1>
+
+    <!-- Dashboard Overview Section -->
+    <div class="dashboard">
+      <h2>Server Status</h2>
+      <p id="serverStatus">Loading server status...</p>
+
+      <h2>Server Port</h2>
+      <p id="serverPort">Loading server port...</p>
+    </div>
+
+    <!-- Last Inventory Record Section -->
+    <div class="inventory-section">
+      <h2>Last Record</h2>
+      <table id="inventoryTable">
+        <thead>
+          <tr>
+            <th>Asset Name</th>
+            <th>Quantity</th>
+            <th>Serial Number</th>
+            <th>Purchase Date</th>
+            <th>Location</th>
+            <th>Asset Tag</th>
+            <th>Picture</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- The last inventory item will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Function to fetch server status and port information
+    async function fetchServerInfo() {
+      try {
+        const response = await fetch('/api/connection-info');
+        const data = await response.json();
+        const statusElement = document.getElementById('serverStatus');
+        const portElement = document.getElementById('serverPort');
+
+        if (data.status === 'Connected') {
+          statusElement.textContent = 'Server Status: UP';
+          statusElement.className = 'status-up';
+          portElement.textContent = `Server Port: ${data.details.match(/port (\d+)/)[1]}`;
+        } else {
+          statusElement.textContent = 'Server Status: DOWN';
+          statusElement.className = 'status-down';
+          portElement.textContent = 'Server Port: Unknown';
+        }
+      } catch (error) {
+        console.error('Error fetching server info:', error);
+        document.getElementById('serverStatus').textContent = 'Server Status: DOWN';
+        document.getElementById('serverStatus').className = 'status-down';
+        document.getElementById('serverPort').textContent = 'Server Port: Unknown';
+      }
+    }
+
+    // Function to fetch the last inventory record
+    async function fetchLastInventory() {
+      try {
+        const response = await fetch('/api/inventory?limit=1');
+        const [item] = await response.json(); // Expecting a single item in an array
+        const tableBody = document.querySelector('#inventoryTable tbody');
+        tableBody.innerHTML = ''; // Clear existing data
+
+        if (item) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.assetname}</td>
+            <td>${item.assetquantity}</td>
+            <td>${item.serialNumber || 'N/A'}</td>
+            <td>${item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : 'N/A'}</td>
+            <td>${item.location || 'N/A'}</td>
+            <td>${item.assetTag || 'N/A'}</td>
+            <td><img src="${item.picture || '#'}" alt="${item.groceryname || 'N/A'}"></td>
+            <td><a href="${item.file || '#'}" download>Download</a></td>
+          `;
+          tableBody.appendChild(row);
+        } else {
+          tableBody.innerHTML = '<tr><td colspan="8">No records found.</td></tr>';
+        }
+      } catch (error) {
+        console.error('Error fetching last inventory record:', error);
+        const tableBody = document.querySelector('#inventoryTable tbody');
+        tableBody.innerHTML = '<tr><td colspan="8">Error loading record.</td></tr>';
+      }
+    }
+
+    // Fetch data when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchServerInfo();
+      fetchLastInventory();
+    });
+  </script>
+</body>
+</html>
